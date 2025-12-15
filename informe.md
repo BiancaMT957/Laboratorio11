@@ -1,0 +1,2 @@
+Se recopilaron evidencias de la cadena de suministro, incluyendo el SBOM generado con Syft y el reporte de vulnerabilidades en formato SARIF generado con Grype.
+Las evidencias fueron organizadas en carpetas dedicadas para facilitar su auditoría.
