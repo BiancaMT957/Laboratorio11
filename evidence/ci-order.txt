@@ -1,0 +1,43 @@
+TAG=2cfe753
+K8S_VERSION=v1.32.2
+[i] usando daemon de minikube para que el cluster vea la imagen
+Sending build context to Docker daemon  270.7MB
+Step 1/12 : FROM python:3.12-slim
+ ---> bf1953a9427f
+Step 2/12 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PORT=8000
+ ---> Using cache
+ ---> 279359462aa2
+Step 3/12 : RUN set -eux;     rm -f /etc/apt/apt.conf.d/docker-clean || true;     apt-get update;     apt-get install -y --no-install-recommends curl ca-certificates;     rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 3e3de833a953
+Step 4/12 : WORKDIR /app
+ ---> Using cache
+ ---> a5ec89ad3dea
+Step 5/12 : COPY requirements.txt /app/requirements.txt
+ ---> Using cache
+ ---> 6c6d42b5b899
+Step 6/12 : RUN pip install --no-cache-dir -r /app/requirements.txt || true
+ ---> Using cache
+ ---> 65f7ca3cbeac
+Step 7/12 : COPY . /app
+ ---> c76fa95ac2d1
+Step 8/12 : RUN useradd -m app && chown -R app:app /app
+ ---> Running in e4bc5d9c2717
+ ---> Removed intermediate container e4bc5d9c2717
+ ---> 9e4821b89213
+Step 9/12 : USER app
+ ---> Running in 43e5c6e2dcd5
+ ---> Removed intermediate container 43e5c6e2dcd5
+ ---> fadf4a17fb04
+Step 10/12 : EXPOSE ${PORT}
+ ---> Running in a826f098f081
+ ---> Removed intermediate container a826f098f081
+ ---> 38c88178cf1d
+Step 11/12 : HEALTHCHECK --interval=30s --timeout=5s --retries=3   CMD curl -fsS "http://127.0.0.1:${PORT}/" || exit 1
+ ---> Running in ed4f35a572d3
+ ---> Removed intermediate container ed4f35a572d3
+ ---> 032b6f933732
+Step 12/12 : CMD ["sh","-c","python -m http.server ${PORT}"]
+ ---> Running in da494c80e46d
+ ---> Removed intermediate container da494c80e46d
+ ---> 69f51de6720c
