@@ -1,0 +1,32 @@
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ ./scripts/minikube_smoke.sh user-service 8000
+[i] smoke: user-service/default -> http://127.0.0.1:8000
+curl: (22) The requested URL returned error: 404
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Directory listing for /</title>
+</head>
+<body>
+<h1>Directory listing for /</h1>
+<hr>
+<ul>
+<li><a href=".evidence/">.evidence/</a></li>
+<li><a href=".venv/">.venv/</a></li>
+<li><a href="artifacts/">artifacts/</a></li>
+<li><a href="docker/">docker/</a></li>
+<li><a href="docker-compose.order.test.yml">docker-compose.order.test.yml</a></li>
+<li><a href="docker-compose.user.test.yml">docker-compose.user.test.yml</a></li>
+<li><a href="healthcheck.py">healthcheck.py</a></li>
+<li><a href="Instrucciones.md">Instrucciones.md</a></li>
+<li><a href="k8s/">k8s/</a></li>
+<li><a href="Makefile">Makefile</a></li>
+<li><a href="requirements.txt">requirements.txt</a></li>
+<li><a href="scripts/">scripts/</a></li>
+<li><a href="server.py">server.py</a></li>
+<li><a href="supply-chain/">supply-chain/</a></li>
+</ul>
+<hr>
+</body>
+</html>
+[OK] SMOKE user-service -> 200

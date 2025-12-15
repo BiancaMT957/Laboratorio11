@@ -1,0 +1,3 @@
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ make scan SERVICE=user-service TAG=latest
+[i] syft no encontrado; usando contenedor (docker-archive)
+SBOM -> artifacts/user-service-sbom.json

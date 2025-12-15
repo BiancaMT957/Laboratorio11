@@ -1,0 +1,5 @@
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ docker inspect user-service:latest >/dev/null && echo OK
+OK
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ make sbom SERVICE=user-service TAG=latest
+[i] syft no encontrado; usando contenedor (docker-archive)
+SBOM -> artifacts/user-service-sbom.json

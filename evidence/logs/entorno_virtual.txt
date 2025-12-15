@@ -1,0 +1,14 @@
+bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ ls
+Instrucciones.md  docker                         healthcheck.py    scripts
+Makefile          docker-compose.order.test.yml  k8s               server.py
+artifacts         docker-compose.user.test.yml   requirements.txt  supply-chain       
+bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ python3 -m venv .venv
+bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ source .venv/bin/activate
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ pip install -r requirements.txt
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ source scripts/env.sh
+SERVICE=order-service TAG=20251214171639 IMAGE=order-service:20251214171639
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ make env SERVICE=user-service
+SERVICE=user-service
+IMAGE=order-service:20251214171639
+K8S_IMAGE=order-service:20251214171639
+K8S_VERSION=v1.32.2

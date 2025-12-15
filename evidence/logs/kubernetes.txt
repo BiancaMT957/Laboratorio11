@@ -1,0 +1,22 @@
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ kubectl apply -f k8s/user-service/deployment-and-service.yaml deployment.apps/user-service configured
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ kubectl apply -f k8s/user-service/deployment-and-service.yaml deployment.apps/order-service configured
+[OK] build in-minikube -> order-service:20251214183120
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS      IMAGES                   SELECTOR
+deployment.apps/order-service   1/1     1            1           63m   order-service   order-service:CHANGEME   app=order-service
+deployment.apps/user-service    1/1     1            1           72m   user-service    user-service:CHANGEME    app=user-service
+
+NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+rvice:CHANGEME   app=order-service
+deployment.apps/user-service    1/1     1            1           72m   user-service    user-service:CHANGEME    app=user-service
+
+NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+service/kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP    82m   <none>
+service/order-service   ClusterIP   10.104.206.111   <none>        8001/TCP   63m   app=order-service
+service/user-service    ClusterIP   10.102.32.93     <none>        8000/TCP   72m   app=user-service
+
+NAME                                READY   STATUS         RESTARTS      AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+pod/order-service-98459988d-fwg5x   0/1     ErrImagePull   0             12s   10.244.0.9   minikube   <none>           <none>
+pod/order-service-d4b8ddd4d-kcsfz   1/1     Running        1 (15m ago)   63m   10.244.0.6   minikube   <none>           <none>
+pod/user-service-59864b99fb-n92bp   1/1     Running        1 (15m ago)   72m   10.244.0.5   minikube   <none>           <none>
+pod/user-service-67c8f95897-7f5zl   0/1     ErrImagePull   0             40s   10.244.0.8   minikube   <none>           <none>
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$

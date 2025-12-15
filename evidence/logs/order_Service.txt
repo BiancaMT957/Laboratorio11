@@ -1,0 +1,95 @@
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ make dev SERVICE=order-service
+SERVICE=order-service
+IMAGE=order-service:20251214173105
+K8S_IMAGE=order-service:20251214173105
+TAG=20251214173105
+K8S_VERSION=v1.32.2
+[i] Asegurando minikube (k8s=v1.32.2)
+minikube status >/dev/null 2>&1 || \
+minikube start --driver=docker --kubernetes-version=v1.32.2 --cpus=2 --memory=4096
+[i] usando daemon de minikube para que el cluster vea la imagen
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  16.61MB
+Step 1/12 : FROM python:3.12-slim
+ ---> bf1953a9427f
+Step 2/12 : ENV PYTHONDONTWRITEBYTECODE=1     PYTHONUNBUFFERED=1     PORT=8000
+ ---> Using cache
+ ---> 8df93b3c52da
+Step 3/12 : RUN set -eux;     rm -f /etc/apt/apt.conf.d/docker-clean || true;     apt-get update;     apt-get install -y --no-install-recommends curl ca-certificates;     rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> e5f45019ead6
+Step 4/12 : WORKDIR /app
+ ---> Using cache
+ ---> adf83ce8bf21
+Step 5/12 : COPY requirements.txt /app/requirements.txt
+ ---> Using cache
+ ---> cedf8e44e78d
+Step 6/12 : RUN pip install --no-cache-dir -r /app/requirements.txt || true
+ ---> Using cache
+ ---> a4ef03be6188
+Step 7/12 : COPY . /app
+ ---> 86b08655bf66
+Step 8/12 : RUN useradd -m app && chown -R app:app /app
+ ---> Running in 3503dd5b7def
+ ---> Removed intermediate container 3503dd5b7def
+ ---> f247e74947db
+Step 9/12 : USER app
+ ---> Running in ad4652e2d1b4
+ ---> Removed intermediate container ad4652e2d1b4
+ ---> 2d49ceb8dc6a
+Step 10/12 : EXPOSE ${PORT}
+ ---> Running in 97e2d3895963
+ ---> Removed intermediate container 97e2d3895963
+ ---> 676b7db0df47
+Step 11/12 : HEALTHCHECK --interval=30s --timeout=5s --retries=3   CMD curl -fsS "http://127.0.0.1:${PORT}/" || exit 1
+ ---> Running in b0ebb31f248f
+ ---> Removed intermediate container b0ebb31f248f
+ ---> 54863bbeb5f0
+Step 12/12 : CMD ["sh","-c","python -m http.server ${PORT}"]
+ ---> Running in a35ce970c390
+ ---> Removed intermediate container a35ce970c390
+ ---> 2a07c41763fa
+Successfully built 2a07c41763fa
+Successfully tagged order-service:20251214173105
+[OK] build in-minikube -> order-service:20251214173105
+Manifest -> artifacts/order-service.yaml
+deployment.apps/order-service created
+service/order-service created
+kubectl rollout status deploy/order-service -n default --timeout=180s
+Waiting for deployment "order-service" rollout to finish: 0 of 1 updated replicas are available...
+deployment "order-service" successfully rolled out
+[i] smoke: order-service/default -> http://127.0.0.1:8001
+curl: (22) The requested URL returned error: 404
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Directory listing for /</title>
+</head>
+<body>
+<h1>Directory listing for /</h1>
+<hr>
+<ul>
+<li><a href=".evidence/">.evidence/</a></li>
+<li><a href=".venv/">.venv/</a></li>
+<li><a href="artifacts/">artifacts/</a></li>
+<li><a href="docker/">docker/</a></li>
+<li><a href="docker-compose.order.test.yml">docker-compose.order.test.yml</a></li>
+<li><a href="docker-compose.user.test.yml">docker-compose.user.test.yml</a></li>
+<li><a href="healthcheck.py">healthcheck.py</a></li>
+<li><a href="Instrucciones.md">Instrucciones.md</a></li>
+<li><a href="k8s/">k8s/</a></li>
+<li><a href="Makefile">Makefile</a></li>
+<li><a href="requirements.txt">requirements.txt</a></li>
+<li><a href="scripts/">scripts/</a></li>
+<li><a href="server.py">server.py</a></li>
+<li><a href="supply-chain/">supply-chain/</a></li>
+</ul>
+<hr>
+</body>
+</html>
+[OK] SMOKE order-service -> 200
+[DEV] OK -> order-service @ order-service:20251214173105

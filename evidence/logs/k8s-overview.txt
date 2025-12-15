@@ -1,0 +1,33 @@
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ kubectl get deploy,svc,pods -o wide
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE    CONTAINERS      IMAGES                   SELECTOR
+deployment.apps/order-service   1/1     1            1           119m   order-service   order-service:CHANGEME   app=order-service
+deployment.apps/user-service    1/1     1            1           128m   user-service    user-service:CHANGEME    app=user-service
+
+NAME                    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE    SELECTOR
+service/kubernetes      ClusterIP   10.96.0.1        <none>        443/TCP    138m   <none>
+service/order-service   ClusterIP   10.104.206.111   <none>        8001/TCP   119m   app=order-service
+service/user-service    ClusterIP   10.102.32.93     <none>        8000/TCP   128m   app=user-service
+
+NAME                                 READY   STATUS             RESTARTS   AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+pod/order-service-686d4ccf65-t599b   0/1     ImagePullBackOff   0          3m2s    10.244.0.19   minikube   <none>           <none>
+pod/order-service-d4b8ddd4d-smpqg    1/1     Running            0          3m2s    10.244.0.18   minikube   <none>           <none>
+pod/user-service-59864b99fb-2qtmq    1/1     Running            0          3m36s   10.244.0.16   minikube   <none>           <none>
+pod/user-service-59b76dc9d5-kc5x2    0/1     ImagePullBackOff   0          3m36s   10.244.0.17   minikube   <none>           <none>
+
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ kubectl port-forward svc/user-service 8000:8000
+Forwarding from 127.0.0.1:8000 -> 8000
+Forwarding from [::1]:8000 -> 8000
+Handling connection for 8000
+Handling connection for 8000
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ bash scripts/wait-for-http.sh "http://127.0.0.1:8000/" 60
+OK http://127.0.0.1:8000/
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ python healthcheck.py --url "http://127.0.0.1:8000/" --timeout 30
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ kubectl port-forward svc/order-service 8001:8001                                                                  kubectl port-forward svc/user-service 8000:8000  
+Forwarding from 127.0.0.1:8001 -> 8001
+Forwarding from [::1]:8001 -> 8001
+Handling connection for 8001
+Handling connection for 8001
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ bash scripts/wait-for-http.sh "http://127.0.0.1:8001/" 60
+OK http://127.0.0.1:8001/
+(.venv) bianca007@MSI:/mnt/c/Users/Bianca/Documents/Laboratorio11$ python healthcheck.py --url "http://127.0.0.1:8001/" --timeout 30
+
